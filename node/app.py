@@ -65,13 +65,6 @@ def load_db():
             with open(STOCK_FILE, "r") as f:
                 data = json.load(f)
                 stock = data.get("stock", [])
-                # If loaded legacy format
-                if isinstance(stock, dict):
-                    stock = [
-                        {"SKU": "sku001", "Quantity": stock.get("sku001", 223), "WarehouseID": NODE_ID},
-                        {"SKU": "sku002", "Quantity": 217, "WarehouseID": NODE_ID},
-                        {"SKU": "sku003", "Quantity": 69, "WarehouseID": NODE_ID}
-                    ]
                 last_tx_id = data.get("last_tx_id", 0)
                 log(f"Stock restored: {stock} | Last TX: {last_tx_id}")
         except Exception as e:
